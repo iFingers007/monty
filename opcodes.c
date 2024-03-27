@@ -24,7 +24,8 @@ void push(stack_t **head, unsigned int line_number)
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-        num = atoi(cmdArg);
+
+	num = atoi(cmdArg);
 /* Check for malloc failure */
 	if (new == NULL)
 	{
