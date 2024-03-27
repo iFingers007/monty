@@ -38,7 +38,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void execCmd(char *cmd, stack_t **head, unsigned int line_num);
+void execCmd(char *cmd, stack_t **head, unsigned int line_number);
 void freeHead(stack_t *h);
 int isInt(char *num);
 

@@ -6,7 +6,7 @@
  *
  * Return: Always return Zero when succesful
  */
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 	FILE *stream = NULL;
 	char line[MAX_LIM];
@@ -26,14 +26,14 @@ int main(int argc, char *argv[])
 	}
 	while (fgets(line, MAX_LIM, stream) != NULL)
 	{
-		char *token = strtok(line, "\t\r\n ");
+		char *tokens = strtok(line, "\t\r\n ");
 
-		if (token == NULL)
+		if (tokens == NULL)
 		{
 			lineNum++;
 			continue;
 		}
-		execCmd(token, &head, lineNum);
+		execCmd(tokens, &head, lineNum);
 		lineNum++;
 	}
 

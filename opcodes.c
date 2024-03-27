@@ -9,7 +9,7 @@
 void push(stack_t **head, unsigned int line_number)
 {
 	int num;
-	char *arg;
+	char *cmdArg;
 	stack_t *new = malloc(sizeof(stack_t));
 	stack_t *temp = *head;
 
@@ -18,13 +18,13 @@ void push(stack_t **head, unsigned int line_number)
 		fprintf(stderr, "Stack is not present\n");
 		exit(EXIT_FAILURE);
 	}
-	arg = strtok(NULL, "\t\r\n");
-	if (arg == NULL || isInt(arg) == 0)
-        {
-                fprintf(stderr, "L%u: usage: push integer\n", line_number);
-                exit(EXIT_FAILURE);
-        }
-        num = atoi(arg);
+	cmdArg = strtok(NULL, "\t\r\n");
+	if (cmdArg == NULL || isInt(cmdArg) == 0)
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+        num = atoi(cmdArg);
 /* Check for malloc failure */
 	if (new == NULL)
 	{
@@ -35,7 +35,7 @@ void push(stack_t **head, unsigned int line_number)
 	new->prev = NULL;
 	new->next = *head;
 
-	if ((*head) != NULL)
+	if (*head != NULL)
 		temp->prev = new;
 	*head = new;
 }
@@ -46,11 +46,10 @@ void push(stack_t **head, unsigned int line_number)
  * @line_number: Line number
  * Return: Void
  */
-void pall(stack_t **head, unsigned int line_number)
+void pall(stack_t **head, __attribute__((unused)) unsigned int line_number)
 {
 	stack_t *temp = *head;
 
-	(void)line_number;
 	while (temp != NULL)
 	{
 		printf("%d\n", temp->n);
