@@ -9,29 +9,30 @@
 void push(stack_t **head, unsigned int line_number)
 {
 	int num;
-	char *cmdArg;
+	char *arg;
 	stack_t *new = malloc(sizeof(stack_t));
 	stack_t *temp = *head;
 
 	if (head == NULL)
 	{
-		fprintf(stderr, "Stack is not present\n");
+		fprintf(stderr, "No stack\n");
 		exit(EXIT_FAILURE);
 	}
-	cmdArg = strtok(NULL, "\t\r\n");
-	if (cmdArg == NULL || isInt(cmdArg) == 0)
+/* Check for malloc failure */
+	if (new == NULL)
+	{
+		fprintf(stderr, "Error: Malloc failed");
+		exit(EXIT_FAILURE);
+	}
+/* Tokenize remaining string and check if its a num */
+	arg = strtok(NULL, "\t\r\n ");
+	if (arg == NULL || isInt(arg) == 0)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	num = atoi(arg);
 
-	num = atoi(cmdArg);
-/* Check for malloc failure */
-	if (new == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
 	new->n = num;
 	new->prev = NULL;
 	new->next = *head;
@@ -47,10 +48,11 @@ void push(stack_t **head, unsigned int line_number)
  * @line_number: Line number
  * Return: Void
  */
-void pall(stack_t **head, __attribute__((unused)) unsigned int line_number)
+void pall(stack_t **head, unsigned int line_number)
 {
 	stack_t *temp = *head;
 
+	(void)line_number;
 	while (temp != NULL)
 	{
 		printf("%d\n", temp->n);
@@ -66,9 +68,9 @@ void pall(stack_t **head, __attribute__((unused)) unsigned int line_number)
  */
 void pint(stack_t **head, unsigned int line_number)
 {
-	if ((*head) == NULL)
+	if (*head == NULL)
 	{
-		fprintf(stderr, "L%d>: can't pint, stack empty\n", line_number);
+		fprintf(stderr, "L%u>: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", (*head)->n);
@@ -86,7 +88,7 @@ void pop(stack_t **head, unsigned int line_number)
 
 	if (*head == NULL)
 	{
-		fprintf(stderr, "L%d>: can't pop an empty stack\n", line_number);
+		fprintf(stderr, "L%u>: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	temp = *head;

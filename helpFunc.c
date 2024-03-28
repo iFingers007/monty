@@ -9,7 +9,7 @@
  */
 void execCmd(char *cmd, stack_t **head, unsigned int line_number)
 {
-	int i = 0;
+	unsigned int i = 0;
 
 	instruction_t code[] = {
 		{"push", push},
@@ -23,8 +23,8 @@ void execCmd(char *cmd, stack_t **head, unsigned int line_number)
 		{"mul", mul},
 		{"div", div_op},
 		{"mod", mod},
-		{"pchar", pchar},
-/*		{"pstr", pstr}, */
+/*		{"pchar", pchar},
+		{"pstr", pstr}, */
 		{NULL, NULL}
 	};
 
@@ -50,10 +50,10 @@ void execCmd(char *cmd, stack_t **head, unsigned int line_number)
  */
 int isInt(char *num)
 {
-	if (*num == '-')
-		num++;
 	if (*num == '\0')
 		return (0);
+	if (*num == '-')
+		num++;
 	while (*num != '\0')
 	{
 		if (*num < '0' || *num > '9')

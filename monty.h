@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#define MAX_LIM 1024
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -38,7 +38,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void execCmd(char *cmd, stack_t **head, unsigned int line_number);
+void execCmd(char *cmd, stack_t **head, unsigned int line_num);
 void freeHead(stack_t *h);
 int isInt(char *num);
 
@@ -48,8 +48,6 @@ void pint(stack_t **head, unsigned int line_number);
 void pop(stack_t **head, unsigned int line_number);
 void swap(stack_t **head, unsigned int line_number);
 void nop(stack_t **head, unsigned int line_number);
-void pchar(stack_t **head, unsigned int line_number);
-
 /*Calculator functions*/
 void add(stack_t **head, unsigned int line_number);
 void sub(stack_t **head, unsigned int line_number);

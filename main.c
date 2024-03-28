@@ -6,11 +6,13 @@
  *
  * Return: Always return Zero when succesful
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	FILE *stream = NULL;
-	char line[MAX_LIM];
+	FILE *stream;
+	char *line = NULL;
+	size_t len = 0;
 	unsigned int lineNum = 1;
+	ssize_t nread;
 	stack_t *head = NULL;
 
 	if (argc != 2)
@@ -24,19 +26,20 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while (fgets(line, MAX_LIM, stream) != NULL)
+	while ((nread = getline(&line, &len, stream)) != -1)
 	{
-		char *tokens = strtok(line, "\t\r\n ");
+		char *token = strtok(line, "\n\t\r ");
 
-		if (tokens == NULL)
+		if (token == NULL)
 		{
 			lineNum++;
 			continue;
 		}
-		execCmd(tokens, &head, lineNum);
+		execCmd(token, &head, lineNum);
 		lineNum++;
 	}
 
+	free(line);
 	freeHead(head);
 	fclose(stream);
 	return (0);
