@@ -23,8 +23,10 @@ void execCmd(char *cmd, stack_t **head, unsigned int line_number)
 		{"mul", mul},
 		{"div", div_op},
 		{"mod", mod},
-/*		{"pchar", pchar},
-		{"pstr", pstr}, */
+/*
+ *		{"pchar", pchar},
+ *		{"pstr", pstr},
+*/
 		{NULL, NULL}
 	};
 
